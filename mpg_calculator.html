@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>MPG Calculator (UK)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>MPG Calculator (UK)</h2>
+
+    <p>Enter the total liters of fuel and the total miles driven to calculate the vehicle's fuel consumption in MPG (miles per gallon).</p>
+    
+    <div>
+        <label for="liters">Total liters of fuel:</label>
+        <input type="number" id="liters" placeholder="Enter liters">
+    </div>
+    <div>
+        <label for="miles">Total miles driven:</label>
+        <input type="number" id="miles" placeholder="Enter miles">
+    </div>
+    <div>
+        <input type="button" value="Calculate MPG" onclick="calculateMPG()">
+        <input type="button" value="Clear" onclick="clearForm()">
+    </div>
+    <h3>Vehicle MPG: <span id="mpgResult"></span></h3>
+    
+    <script>
+        function calculateMPG() {
+            // Get the input values and convert to numbers (float)
+            let liters = parseFloat(document.getElementById('liters').value);
+            let miles = parseFloat(document.getElementById('miles').value);
+            
+            // Validate the input values
+            if (isNaN(liters) || liters <= 0) {
+                window.alert('Please enter the liters of fuel.');
+                document.getElementById('liters').focus();
+            } else if (isNaN(miles) || miles <= 0) {
+                window.alert('Please enter the miles driven.');
+                document.getElementById('miles').focus();
+            } else {
+                // Convert liters to gallons UK
+                let gallons = liters * 0.2199692483;
+                // Calculate MPG (miles per gallon)
+                let mpg = (miles / gallons).toFixed(2);
+                document.getElementById('mpgResult').innerText = mpg;
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('liters').value = '';
+            document.getElementById('miles').value = '';
+            document.getElementById('mpgResult').innerText = '';
+        }
+    </script>
+</body>
+</html>
